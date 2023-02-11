@@ -1,78 +1,10 @@
 ﻿#include <iostream>
-#include <map>
 
 using namespace std;
 
-//IExpression ::= NumberExpression | Constant | AddExpr | SubstractExpr
-//
-//AddExpr ::= IExpression + IExpression
-//SubstractExpr :: = IExpression - IExpression
-//
-//NumberExpression ::= [A-Z,a-z]+
-//Constant ::= [0-9]+
-
-class Context
-{
-    map<string, int> variables;
-public:
-    int GetVariable(string key)
-    {
-        return variables[key];
-    }
-
-    void SetVariable(string key, int value)
-    {
-        if (variables.contains(key))
-            variables[key] = value;
-        else
-            variables.insert({ key, value });
-    }
-};
-
-class IExpression
-{
-public:
-    virtual int Iterpret(Context* context) = 0;
-};
-
-class NumberExpression : public IExpression
-{
-    string name;
-public:
-    NumberExpression(string name) : name{ name } {}
-    int Iterpret(Context* context) override
-    {
-        return context->GetVariable(name);
-    }
-};
-
-class AddExpression : public IExpression
-{
-    IExpression* expressionLeft;
-    IExpression* expressionRight;
-public:
-    AddExpression(IExpression* expressionLeft, IExpression* expressionRight)
-        : expressionLeft{ expressionLeft }, expressionRight{ expressionRight } {}
-    int Iterpret(Context* context) override
-    {
-        return expressionLeft->Iterpret(context) + expressionRight->Iterpret(context);
-    }
-};
-
-class SubExpression : public IExpression
-{
-    IExpression* expressionLeft;
-    IExpression* expressionRight;
-public:
-    SubExpression(IExpression* expressionLeft, IExpression* expressionRight)
-        : expressionLeft{ expressionLeft }, expressionRight{ expressionRight } {}
-    int Iterpret(Context* context) override
-    {
-        return expressionLeft->Iterpret(context) - expressionRight->Iterpret(context);
-    }
-};
-
-int main()
+/*
+#include "Interpreter.h"
+void InterpreterExample()
 {
     Context* context = new Context();
     context->SetVariable("a", 50);
@@ -87,5 +19,78 @@ int main()
     int result = expression->Iterpret(context);
 
     cout << result;
+}
+*/
+
+/*
+#include "Observer.h"
+void ObserverExample()
+{
+    Market* market = new Market();
+    Bank* bank = new Bank("SberBank", market);
+    Broker* broker = new Broker("Jhon Smith", market);
+
+    market->Bidding();
+    cout << "\n";
+
+    market->Bidding();
+    cout << "\n";
+
+    broker->StopMarket();
+
+    market->Bidding();
+    cout << "\n";
+}
+*/
+
+/*
+#include "Memento.h"
+void MementoExample()
+{
+    Player* player = new Player();
+    GameHistory* gameHistory = new GameHistory();
+
+    player->Play();
+
+    gameHistory->Save(player->Save());
+
+    player->Play();
+
+    gameHistory->Save(player->Save());
+
+    player->Play();
+
+    player->Load(gameHistory->Load());
+
+    player->Play();
+}
+*/
+
+/*
+#include "TemplateMethod.h"
+void TemplateMethodExample()
+{
+    Education* education = new School();
+    education->Learn();
+    cout << "\n";
+
+    education = new Universitet();
+    education->Learn();
+}
+*/
+
+#include "Visitor.h"
+
+int main()
+{
+    Person* bob = new Person();
+    bob->name = "Bob";
+    bob->accNumber = "12345ASD";
+    bob->amount = 50000;
+
+    IAccount* account = bob;
+    account->Accept(new XmlVisitor());
+
+    account->Accept(new JsonVisitor());
 }
 

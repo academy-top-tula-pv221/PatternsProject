@@ -130,6 +130,13 @@
   <ItemGroup>
     <ClCompile Include="PatternsProject.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Interpreter.h" />
+    <ClInclude Include="Memento.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="TemplateMethod.h" />
+    <ClInclude Include="Visitor.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
